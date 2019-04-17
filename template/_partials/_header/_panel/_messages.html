@@ -1,0 +1,114 @@
+{% load static %}
+<li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="dropdownChat" data-toggle="dropdown">
+            <i class="icon-Speach-Bubbles"></i>
+            <span class="badge badge-success text-white anibadge d-block">9</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right no-padding dropdown-menu-lg" aria-labelledby="dropdownChat">
+
+            <div class="dropdown-header-top flex d-flex align-items-center">
+                <span class="d-flex flex text-dark dropdown-title">Recent</span>
+                <a class="d-flex d-inline-flex text-primary">
+                    <i class="fa fs10 fa-plus mr-2 d-flex d-inline-flex align-self-center"></i>
+                    New Message
+                </a>
+            </div>
+            <div style="height: 350px">
+                <div class="slim-scroll">
+                    <ul class="list chat-list">
+                        <li class="list-item align-items-center chat-user user-online unread">
+                            <a href="#" class="list-link"></a>
+                            <div class="list-thumb avatar avatar50 rounded-circle">
+                                <img src="{% static 'images/avatar1.jpg' %}" class="img-fluid" alt="">
+                            </div>
+                            <div class="list-body">
+                                <span class="list-title">
+                                    Emily Doe
+                                </span>
+                                <span class="list-content">
+                                    We'have created a support ticket but
+                                </span>
+                                <span class="list-meta">
+                                    3 Hours ago
+                                </span>
+                            </div>
+                        </li>
+                        <!--item-->
+                        <li class="list-item align-items-center chat-user">
+                            <a href="#" class="list-link"></a>
+                            <div class="list-thumb avatar avatar50 rounded-circle">
+                                <img src="{% static 'images/avatar2.jpg' %}" class="img-fluid" alt="">
+                            </div>
+                            <div class="list-body">
+                                <span class="list-title">
+                                    Adam Voges
+                                </span>
+                                <span class="list-content">
+                                    We'have created a support ticket but
+                                </span>
+                                <span class="list-meta">
+                                    7 Hours ago
+                                </span>
+                            </div>
+                        </li>
+                        <!--item-->
+                        <li class="list-item align-items-center chat-user">
+                            <a href="#" class="list-link"></a>
+                            <div class="list-thumb avatar avatar50 rounded-circle">
+                                <img src="{% static 'images/avatar5.jpg' %}" class="img-fluid" alt="">
+                            </div>
+                            <div class="list-body">
+                                <span class="list-title">
+                                    Pamela Anderson
+                                </span>
+                                <span class="list-content">
+                                    We'have created a support ticket but
+                                </span>
+                                <span class="list-meta">
+                                    20 Hours ago
+                                </span>
+                            </div>
+                        </li>
+                        <!--item-->
+                        <li class="list-item align-items-center chat-user user-dnd">
+                            <a href="#" class="list-link"></a>
+                            <div class="list-thumb avatar avatar50 rounded-circle">
+                                <img src="{% static 'images/avatar4.jpg' %}" class="img-fluid" alt="">
+                            </div>
+                            <div class="list-body">
+                                <span class="list-title">
+                                    Robin Edwards
+                                </span>
+                                <span class="list-content">
+                                    We'have created a support ticket but
+                                </span>
+                                <span class="list-meta">
+                                    Yesterday
+                                </span>
+                            </div>
+                        </li>
+                        <!--item-->
+                        <li class="list-item align-items-center chat-user user-away">
+                            <a href="#" class="list-link"></a>
+                            <div class="list-thumb avatar avatar50 bg-primary-light text-primary rounded-circle">
+                                <i class='icon-Boy'></i>
+                            </div>
+                            <div class="list-body">
+                                <span class="list-title">
+                                    Abraham Josef
+                                </span>
+                                <span class="list-content">
+                                    We'have created a support ticket but
+                                </span>
+                                <span class="list-meta">
+                                    3 Days ago
+                                </span>
+                            </div>
+                        </li>
+                        <!--item-->
+                    </ul>
+                </div>
+            </div>
+            <a class="dropdown-footer">View All Messages</a>
+        </div>
+    </li>

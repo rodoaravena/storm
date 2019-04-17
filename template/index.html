@@ -1,0 +1,49 @@
+{% extends '_partials/_base.html' %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block styles %}
+    <link href="{% static 'lib/fullcalendar/fullcalendar.min.css' %} " rel="stylesheet">
+{% endblock styles %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item">Dashboard</li>
+{% endblock breadcrumbs %}
+{% block content %}
+
+<div class="row fullscreen">
+    <div class="col-xl-8 col-lg-8 bg-white d-flex no-padding flex-column">
+        <div class="p-4">            
+            <div id="calendar"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'lib/fullcalendar/moment.js' %}"></script>
+    <script src="{% static 'lib/fullcalendar/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'lib/fullcalendar/locales/es.js' %}"></script>
+
+    <script>
+            $('#calendar').fullCalendar({
+                locale: 'es',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                customButtons: {
+                    myCustomButton: {
+                        text: 'custom!',
+                        click: function () {
+                            alert('clicked the custom button!');
+                        }
+                    }
+                },
+                navLinks: true, // can click day/week names to navigate views
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: []
+            });
+    </script>
+{% endblock javascript %}

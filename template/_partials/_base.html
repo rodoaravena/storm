@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title> {% block title %}{% endblock title %} | Application name</title>
+        <!-- Bootstrap-->
+        <link href="{% static 'lib/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+        <!--Common Plugins CSS -->
+        <link href="{% static 'css/plugins/plugins.css' %}" rel="stylesheet">
+        <!--fonts-->
+        <link href="{% static 'lib/line-icons/line-icons.css' %}" rel="stylesheet">
+        <link href="{% static 'lib/font-awesome/css/fontawesome-all.min.css' %}" rel="stylesheet">
+        <!-- jvectormap -->
+        <link href="{% static 'lib/vector-map/jquery-jvectormap-2.0.2.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        {% block styles %}
+        {% endblock styles %}
+    </head>
+    <body>
+
+        <div class="page-wrapper" id="page-wrapper">
+            <aside id="page-aside" class=" page-aside aside-fixed aside-folded">
+                <div class="sidenav darkNav">
+                        {% include "_partials/_sidebar/_header.html" %}
+                    <div class="flex">
+                        <div class="aside-content slim-scroll">
+                            {% include "_partials/_sidebar/_menu.html" %}
+                        </div><!-- aside content end-->
+                    </div><!-- aside hidden scroll end-->
+                    <div class="aside-footer p-3 pl-25">
+                            {% include "_partials/_sidebar/_footer.html" %}
+                    </div><!-- aside footer end-->
+                </div><!-- sidenav end-->
+            </aside><!-- page-aside end-->
+            <main class="content">
+                <header class="navbar page-header whiteHeader navbar-expand-lg">
+                    <!-- Toogle button -->
+                    <ul class="nav flex-row mr-auto">
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link sidenav-btn h-lg-down">
+                                <span class="navbar-toggler-icon"></span>
+                            </a>
+                            <a class="nav-link sidenav-btn h-lg-up" href="#page-aside"  data-toggle="dropdown" data-target="#page-aside">
+                                <span class="navbar-toggler-icon"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- /Toogle button -->
+                    {% include "_partials/_header/_search.html" %}
+                    {% include "_partials/_header/_user_panel.html" %}
+                    
+
+                </header>
+                <div class="page-subheader mb-30">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <div class="list">
+                                    <div class="list-item pl-0">
+                                        <div class="list-thumb ml-0 mr-3 pr-3  b-r text-muted">
+                                            <i class="icon-Home"></i>
+                                        </div>
+                                        <div class="list-body">
+                                            <div class="list-title fs-2x">
+                                                <h3>Welcome <strong>Sarah</strong></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 d-flex justify-content-end h-md-down">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb no-padding bg-trans mb-0">
+                                        <li class="breadcrumb-item"><a href="#"><i class="icon-Home mr-2 fs14"></i></a></li>
+                                        {% block breadcrumbs %}
+                                        {% endblock breadcrumbs %}
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- page-sub-Header end-->
+                <div class="page-content d-flex flex">
+                    <div class="container-fluid">
+                       {% block content %}
+                       {% endblock content %}
+                    </div>
+                </div>
+                <footer class="content-footer bg-light b-t">
+                    {% include '_partials/_footer/_actions.html' %}
+                </footer><!-- footer end-->
+            </main><!-- page content end-->
+        </div><!-- app's main wrapper end -->
+        <!-- Common plugins -->
+        <script type="text/javascript" src="{% static 'js/plugins/plugins.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/appUi-custom.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/chartjs/dist/chart.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/peity/jquery.peity.min.js' %}"></script>
+        <!-- jvectormap -->
+        <script src="{% static 'lib/vector-map/jquery-jvectormap-2.0.2.min.js' %}"></script>
+        <script src="{% static 'lib/vector-map/jquery-jvectormap-world-mill-en.js' %}"></script>
+       {% block javascript %}
+       {% endblock javascript %}
+    </body>
+</html>
