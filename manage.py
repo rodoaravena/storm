@@ -2,10 +2,15 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import ptvsd
 
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'storm.settings')
+    # Attach debugger tu VS Code
+    if os.environ.get("DJANGO_DEBUGGER", False):
+        ptvsd.enable_attach(address=("0.0.0.0", 3000))
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

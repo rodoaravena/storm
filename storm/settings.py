@@ -58,6 +58,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'storm.urls'
 
+APPLICATION_NAME = 'Storm'
+
 # Rest Framework settings
 
 LOGIN_URL = 'rest_framework:login'
@@ -135,6 +137,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'storm.context_processors.application_name',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',

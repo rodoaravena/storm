@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from schedule.serializers import ScheduleSerializer, UserProfileSerializer
 from schedule.models import Schedule, UserProfile
 
@@ -15,7 +16,7 @@ class InfoSchedules(APIView):
         **day** -- Representa el día de la reserva, permite obtener todas las reservas de un día en específico. Es necesario incluir en año y el mes         
     
     """
-
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     def get(self, request, day=None, month=None, year=None, format=None):
         schedule = Schedule.objects
         if day is not None and month is not None and year is not None:

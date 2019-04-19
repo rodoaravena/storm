@@ -5,16 +5,38 @@
     <link href="{% static 'lib/fullcalendar/fullcalendar.min.css' %} " rel="stylesheet">
 {% endblock styles %}
 {% block breadcrumbs %}
-    <li class="breadcrumb-item">Dashboard</li>
+    <li class="breadcrumb-item">Disponibilidad</li>
 {% endblock breadcrumbs %}
 {% block content %}
 
 <div class="row fullscreen">
-    <div class="col-xl-8 col-lg-8 bg-white d-flex no-padding flex-column">
+    <div class="col-xl-12 col-lg-12">
+        <div class="portlet-box portlet-gutter ui-buttons-col mb-30">
+            <div class="portlet-header flex-row flex d-flex align-items-center b-b bg-primary">
+                <div class="flex d-flex flex-column">
+                    <h3>Generar solicitud</h3> 
+                    <span class="portlet-subtitle">Clic aquí para generar solicitud</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="form-group">
+                    <input type="text" placeholder='Small' class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder='Default' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder='Large' class="form-control form-control-lg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 bg-white d-flex no-padding flex-column">
         <div class="p-4">            
             <div id="calendar"></div>
         </div>
     </div>
+    
 </div>
 
 {% endblock content %}
@@ -40,10 +62,10 @@
                         }
                     }
                 },
-                navLinks: true, // can click day/week names to navigate views
+                navLinks: true, 
                 editable: true,
-                eventLimit: true, // allow "more" link when too many events
-                events: []
+                eventLimit: true, 
+                events: '{% url "get_events" %}'
             });
     </script>
 {% endblock javascript %}

@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: scheduledb
+      POSTGRES_USER: schedule
+      POSTGRES_PASSWORD: schedule_807
+  web:
+    build: .
+    command: bash -c "DJANGO_DEBUGGER=True python3 manage.py runserver --noreload --nothreading 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      NAME: scheduledb
+      USER: schedule
+      PASSWORD: schedule_807
+      HOST: db

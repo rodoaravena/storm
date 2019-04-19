@@ -17,7 +17,8 @@ class UserProfileSerializer(serializers.Serializer):
 
 class ModuleTimeSerializer(serializers.Serializer):
     module = serializers.IntegerField(read_only=True)
-    label = serializers.CharField(required=False, allow_blank=True, max_length=5)
+    start = serializers.CharField(required=False, allow_blank=True, max_length=5)
+    end = serializers.CharField(required=False, allow_blank=True, max_length=5)
     class Meta:
         model = ModuleTime
 
