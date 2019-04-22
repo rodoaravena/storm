@@ -11,7 +11,7 @@ import json
 def get_events(request):
     events_month = []
     now = datetime.datetime.now()
-    result = InfoSchedules().get(request, None, now.month, now.year, None)
+    result = InfoSchedules().get(request, None, None, None, None)
     result = json.loads(json.dumps(result.data.serializer.data))
 
     for res in result:
@@ -19,8 +19,8 @@ def get_events(request):
         events_month.append({
             'id':res['id'],
             'title':res['author'],
-            'start':str(res['date_schedule']) + 'T' + str(res['module']['start']),
-            'end':str(res['date_schedule']) + 'T' + str(res['module']['end']),
+            'start':str(res['date_schedule_start']),
+            'end':str(res['date_schedule_end']),
         })
     
 

@@ -9,6 +9,7 @@ services:
       POSTGRES_PASSWORD: schedule_807
   web:
     build: .
+    image: schedule_app
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
@@ -21,3 +22,17 @@ services:
       USER: schedule
       PASSWORD: schedule_807
       HOST: db
+  migrate:
+    image: schedule_app
+    command: python3 manage.py migrate
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+    environment:
+      NAME: scheduledb
+      USER: schedule
+      PASSWORD: schedule_807
+      HOST: db
+
+  

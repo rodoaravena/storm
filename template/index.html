@@ -3,6 +3,7 @@
 {% block title %}{% endblock title %}
 {% block styles %}
     <link href="{% static 'lib/fullcalendar/fullcalendar.min.css' %} " rel="stylesheet">
+    <link href="{% static 'lib/dt-picker/jquery.datetimepicker.min.css' %}" rel="stylesheet">
 {% endblock styles %}
 {% block breadcrumbs %}
     <li class="breadcrumb-item">Disponibilidad</li>
@@ -10,32 +11,44 @@
 {% block content %}
 
 <div class="row fullscreen">
-    <div class="col-xl-12 col-lg-12">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 bg-white d-flex no-padding flex-column">
+        <div class="p-4">            
+            <div id="calendar"></div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
         <div class="portlet-box portlet-gutter ui-buttons-col mb-30">
             <div class="portlet-header flex-row flex d-flex align-items-center b-b bg-primary">
                 <div class="flex d-flex flex-column">
                     <h3>Generar solicitud</h3> 
                     <span class="portlet-subtitle">Clic aquí para generar solicitud</span>
-                </div>
+                </div>                
             </div>
-            <div class="portlet-body">
-                <div class="form-group">
-                    <input type="text" placeholder='Small' class="form-control form-control-sm">
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder='Default' class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder='Large' class="form-control form-control-lg">
-                </div>
+            <div class="portlet-body" id="body-generate">
+                <div class="row">
+                    <div class="col-md-12 mb-30">
+                        <div class="p-3 bg-white rounded shadow-sm">
+                            <span class="fs-1x d-block pb-2">Seleccione fecha</span>
+                            <input id="datetimepicker" placeholder="Escoja una hora" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-30">
+                        <div class="p-3 bg-white rounded shadow-sm">
+                            <span class="fs-1x d-block pb-2">Seleccione hora inicio</span>
+                            <input id="hourstartpicker" placeholder="Escoja una hora" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-30">
+                        <div class="p-3 bg-white rounded shadow-sm">
+                            <span class="fs-1x d-block pb-2">Seleccione hora fin</span>
+                            <input id="hourendpicker" placeholder="Escoja una fecha" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>                
             </div>
         </div>
     </div>
-    <div class="col-xl-12 col-lg-12 bg-white d-flex no-padding flex-column">
-        <div class="p-4">            
-            <div id="calendar"></div>
-        </div>
-    </div>
+    
     
 </div>
 
@@ -43,10 +56,29 @@
 
 {% block javascript %}
     <script src="{% static 'lib/fullcalendar/moment.js' %}"></script>
-    <script src="{% static 'lib/fullcalendar/fullcalendar.min.js' %}"></script>
     <script src="{% static 'lib/fullcalendar/locales/es.js' %}"></script>
+    <script src="{% static 'lib/fullcalendar/fullcalendar.min.js' %}"></script>       
+    <script type="text/javascript" src="{% static 'lib/dt-picker/jquery.datetimepicker.full.min.js' %}"></script>
 
     <script>
+        $(document).ready(function(){
+            $.datetimepicker.setLocale('es');
+            $('#datetimepicker').datetimepicker({
+                format: 'd/m/Y',
+                timepicker:false,
+                minDate:0,
+                dayOfWeekStart: 1,
+            });
+            $('#hourstartpicker').datetimepicker({
+                format: 'd/m/Y',
+                timepicker:false,
+                minDate:0,
+                dayOfWeekStart: 1,
+            });
+            $('#hourendpicker').datetimepicker({
+                format: 'H:i',
+                datepicker:false,
+            });
             $('#calendar').fullCalendar({
                 locale: 'es',
                 header: {
@@ -54,18 +86,10 @@
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
-                customButtons: {
-                    myCustomButton: {
-                        text: 'custom!',
-                        click: function () {
-                            alert('clicked the custom button!');
-                        }
-                    }
-                },
-                navLinks: true, 
-                editable: true,
-                eventLimit: true, 
+                navLinks: true,  
                 events: '{% url "get_events" %}'
             });
+        });
+        
     </script>
 {% endblock javascript %}
