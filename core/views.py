@@ -10,19 +10,16 @@ import json
 @csrf_exempt
 def get_events(request):
     events_month = []
-    now = datetime.datetime.now()
     result = InfoSchedules().get(request, None, None, None, None)
     result = json.loads(json.dumps(result.data.serializer.data))
 
     for res in result:
-        print(res)
         events_month.append({
             'id':res['id'],
             'title':res['author'],
             'start':str(res['date_schedule_start']),
             'end':str(res['date_schedule_end']),
-        })
-    
+        })   
 
     return JsonResponse(events_month, safe=False)
 

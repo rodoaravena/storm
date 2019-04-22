@@ -19,7 +19,7 @@ class InfoSchedules(APIView):
     
     """
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    def get(self, request, day=None, month=None, year=None, format=None):
+    def get(self, request, day=None, month=None, year=None, format='json'):
         schedule = Schedule.objects
         if day is not None and month is not None and year is not None:
             schedule = schedule.filter(date_schedule_start__year=year, date_schedule_start__month=month, date_schedule_start__day=day)

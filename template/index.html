@@ -70,10 +70,8 @@
                 dayOfWeekStart: 1,
             });
             $('#hourstartpicker').datetimepicker({
-                format: 'd/m/Y',
-                timepicker:false,
-                minDate:0,
-                dayOfWeekStart: 1,
+                format: 'H:i',
+                datepicker:false,
             });
             $('#hourendpicker').datetimepicker({
                 format: 'H:i',
@@ -89,7 +87,31 @@
                 navLinks: true,  
                 events: '{% url "get_events" %}'
             });
+
+            $('#datetimepicker').on('change', function(){
+                var year = $(this).datetimepicker('getValue').getFullYear();
+                var month = $(this).datetimepicker('getValue').getMonth() + 1;
+                month = ((month < 10) ? '0'+month : month)
+                var day = $(this).datetimepicker('getValue').getDate();
+                var urlBase = "/api/schedule/available/"+year+"/"+month+"/"+day+"/";
+                loadHours(urlBase);
+            });
         });
         
+    </script>
+    <script>
+        function loadHours(urlBase){
+            console.log(urlBase)
+            $.ajax({
+                url:urlBase,
+                method:'GET',
+                success:function(result){
+                    console.log(result);
+                },
+                error:function(requestObject, error, errorThrown){
+                    console.log(requestObject)
+                }
+            });
+        }
     </script>
 {% endblock javascript %}
