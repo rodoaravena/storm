@@ -29,20 +29,23 @@
                     <div class="col-md-12 mb-30">
                         <div class="p-3 bg-white rounded shadow-sm">
                             <span class="fs-1x d-block pb-2">Seleccione fecha</span>
-                            <input id="datetimepicker" placeholder="Escoja una hora" type="text" class="form-control">
-                        </div>
+                            <input id="datetimepicker" type="text" class="form-control" placeholder="Escoja una fecha">
+                        </div>                        
                     </div>
-                    <div class="col-md-12 mb-30">
+                    <div class="col-md-6 mb-30">
                         <div class="p-3 bg-white rounded shadow-sm">
                             <span class="fs-1x d-block pb-2">Seleccione hora inicio</span>
-                            <input id="hourstartpicker" placeholder="Escoja una hora" type="text" class="form-control">
+                            <input disabled id="hourstartpicker" placeholder="Escoja una hora de inicio" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-30">
+                        <div class="p-3 bg-white rounded shadow-sm">
+                            <span class="fs-1x d-block pb-2">Seleccione hora fin</span>
+                            <input disabled id="hourendpicker" placeholder="Escoja una hora de termino" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-12 mb-30">
-                        <div class="p-3 bg-white rounded shadow-sm">
-                            <span class="fs-1x d-block pb-2">Seleccione hora fin</span>
-                            <input id="hourendpicker" placeholder="Escoja una fecha" type="text" class="form-control">
-                        </div>
+                        <span class="btn btn-block btn-success" id="request-room">Solicitar sala</span>
                     </div>
                 </div>                
             </div>
@@ -80,9 +83,9 @@
             $('#calendar').fullCalendar({
                 locale: 'es',
                 header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay'
+                    left: 'prev,next',
+                    center: 'today',
+                    right: 'title'
                 },
                 navLinks: true,  
                 events: '{% url "get_events" %}'
@@ -96,6 +99,18 @@
                 var urlBase = "/api/schedule/available/"+year+"/"+month+"/"+day+"/";
                 loadHours(urlBase);
             });
+            $('#hourstartpicker').on('change', function(){
+                var year = $('#datetimepicker').datetimepicker('getValue').getFullYear();
+                var month = $('#datetimepicker').datetimepicker('getValue').getMonth() + 1;
+                month = ((month < 10) ? '0'+month : month)
+                var day = $('#datetimepicker').datetimepicker('getValue').getDate();
+                var hour = $(this).datetimepicker('getValue').getHours();
+                hour = ((hour < 10) ? '0'+hour : hour)
+                var min = $(this).datetimepicker('getValue').getMinutes();
+                min = ((min < 10) ? '0'+min : min)
+                var urlBase = "/api/schedule/range/"+year+"/"+month+"/"+day+"/"+hour+"/"+min+"/";
+                loadHoursEnd(urlBase);
+            });
         });
         
     </script>
@@ -106,11 +121,36 @@
                 url:urlBase,
                 method:'GET',
                 success:function(result){
-                    console.log(result);
+                    enableStartSelect(result);
                 },
                 error:function(requestObject, error, errorThrown){
                     console.log(requestObject)
                 }
+            });
+        }
+        function loadHoursEnd(urlBase){
+            console.log(urlBase)
+            $.ajax({
+                url:urlBase,
+                method:'GET',
+                success:function(result){
+                    enableEndSelect(result);
+                },
+                error:function(requestObject, error, errorThrown){
+                    console.log(requestObject)
+                }
+            });
+        }
+        function enableStartSelect(hours){
+            $('#hourstartpicker').prop('disabled',false);
+            $('#hourstartpicker').datetimepicker({
+                allowTimes:hours.available_hours
+            });
+        }
+        function enableEndSelect(hours){
+            $('#hourendpicker').prop('disabled',false);
+            $('#hourendpicker').datetimepicker({
+                allowTimes:hours.range_hours
             });
         }
     </script>

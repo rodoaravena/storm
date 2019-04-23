@@ -5,7 +5,7 @@ from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework_swagger.views import get_swagger_view
 from api import views
-from api.apiviews import InfoSchedules, RegisterUser, InfoUser, InfoAvailableSchedule
+from api.apiviews import InfoSchedules, RegisterUser, InfoUser, InfoAvailableRoomHours, InfoRangeRoomHours
 
 schema_view = get_swagger_view(title='Storm Api')
 
@@ -16,7 +16,8 @@ urlpatterns = [
     path('auth/rest/', include('rest_auth.urls'), name='rest_auth'),
 
     # schedules
-    path('schedule/available/<year>/<month>/<day>/', InfoAvailableSchedule.as_view(), name='available_schedules'),
+    path('schedule/available/<year>/<month>/<day>/', InfoAvailableRoomHours.as_view(), name='available_schedules'),
+    path('schedule/range/<year>/<month>/<day>/<hour>/<min>/', InfoRangeRoomHours.as_view(), name='range_schedules'),
     path('schedule/info/', InfoSchedules.as_view(), name='info_schedules'),
     path('schedule/info/<year>/', InfoSchedules.as_view(), name='year_schedules'),
     path('schedule/info/<year>/<month>/', InfoSchedules.as_view(), name='month_schedules'),

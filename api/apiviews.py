@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from schedule.serializers import ScheduleSerializer, UserProfileSerializer
 from schedule.models import Schedule, UserProfile
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class InfoSchedules(APIView):
@@ -35,7 +35,7 @@ class InfoSchedules(APIView):
         serializer = ScheduleSerializer(schedule, many=True)
         return Response(serializer.data)
 
-class InfoAvailableSchedule(APIView):
+class InfoAvailableRoomHours(APIView):
     """
     Trae información sobre los horarios dispobibles de la sala activas, en el día.
     Este endpoint soporta 3 parametros:
@@ -62,7 +62,7 @@ class InfoAvailableSchedule(APIView):
             '18:30','19:00',
             '19:30','20:00',
             '20:30','21:00',
-            '21:30','22:00',
+            '21:30',
         ]
         data = {}
         busy_hours = []
@@ -80,6 +80,54 @@ class InfoAvailableSchedule(APIView):
                 available_hours.append(h_a)
 
         data['available_hours'] = available_hours
+        
+        return Response(data)
+
+class InfoRangeRoomHours(APIView):
+    """
+    Trae información sobre los horarios dispobibles de la sala activas, en el día.
+    Este endpoint soporta 3 parametros:
+        **year** -- Respresenta el año de la reserva, permite obtener todas las reservas en un año en específico
+        **month** -- Representa el mes de la reserva, permite obtener todas las reservas de un mes en específico. Es necesario incluir en año
+        **day** -- Representa el día de la reserva, permite obtener todas las reservas de un día en específico. Es necesario incluir en año y el mes         
+        ** hour ** -- Representa la hora 
+        ** * ** -- Posteriormente soportará la sala a solicitar
+    """
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    
+
+    def get(self, request, year, month, day, hour, min, format=None):
+        list_hours = []
+        data = {}
+        busy_hours = []
+        range_hours = []
+        end_hour = datetime.strptime(hour+":"+min, '%H:%M')
+        print(end_hour)
+        while True:
+            end_hour = end_hour + timedelta(minutes=30)
+            h = "0"+str(end_hour.hour) if int(end_hour.hour) < 10 else str(end_hour.hour)
+            m = "0"+str(end_hour.minute) if int(end_hour.minute) < 10 else str(end_hour.minute)
+            list_hours.append(h+":"+m)
+            if end_hour.hour == 22 and end_hour.minute == 0:
+                break
+
+        schedules = Schedule.objects.filter(date_schedule_start__year=year, date_schedule_start__month=month, date_schedule_start__day=day)
+        for h in list_hours:
+            for s in schedules:
+                start = timezone.localtime(s.date_schedule_start)
+                end = timezone.localtime(s.date_schedule_end)
+                hora = datetime.strptime(h, '%H:%M')
+                if start.time() <= hora.time() < end.time():
+                    busy_hours.append(h)
+                        
+        for h_a in list_hours:
+            if h_a not in busy_hours:
+                range_hours.append(h_a)
+            else:
+                range_hours.append(h_a)
+                break
+
+        data['range_hours'] = range_hours
         
         return Response(data)
         
