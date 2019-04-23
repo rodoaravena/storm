@@ -102,7 +102,6 @@ class InfoRangeRoomHours(APIView):
         busy_hours = []
         range_hours = []
         end_hour = datetime.strptime(hour+":"+min, '%H:%M')
-        print(end_hour)
         while True:
             end_hour = end_hour + timedelta(minutes=30)
             h = "0"+str(end_hour.hour) if int(end_hour.hour) < 10 else str(end_hour.hour)
