@@ -1,10 +1,15 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from api.apiviews import InfoSchedules
 import requests
 import datetime
 import json
+
+def index(request):
+    template_name = 'index.html'
+    context = {}
+    return render(request, template_name,context)
 
 
 @csrf_exempt

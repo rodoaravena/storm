@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'schedule.apps.ScheduleConfig',
     'corsheaders',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'storm.urls'
 
-APPLICATION_NAME = 'Storm'
+APPLICATION_NAME = 'Tornado'
 
 # Rest Framework settings
 
@@ -134,7 +135,10 @@ CORS_ALLOW_HEADERS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'template')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'template'),
+            os.path.join(BASE_DIR, 'core/template')
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

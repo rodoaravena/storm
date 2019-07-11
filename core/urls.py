@@ -1,11 +1,12 @@
 from django.conf.urls import url
 from django.urls import path, include, re_path
 from django.views.generic.base import TemplateView
-from core import views
+from core import views as core_views
 
 
 urlpatterns = [
     # core
-    path('index/', TemplateView.as_view(template_name='index.html'), name='index'),
-    path('get/events/', views.get_events, name='get_events'),
+    path('', core_views.index),
+    path('index/', core_views.index, name='index'),
+    path('get/events/', core_views.get_events, name='get_events'),
 ]
