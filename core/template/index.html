@@ -12,12 +12,11 @@
 {% block content %}
 
 <div class="row fullscreen">
-    <div class="{% if request.user.is_authenticaded %}col-xl-6 col-lg-6{% else %}col-xl-12 col-lg-12{% endif %} col-md-12 col-sm-12 bg-white d-flex no-padding flex-column">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 bg-white d-flex no-padding flex-column">
         <div class="p-4">            
             <div id="calendar"></div>
         </div>
     </div>
-    {% if request.user.is_authenticaded %}
     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
         <div class="portlet-box portlet-gutter ui-buttons-col mb-30">
             <div class="portlet-header flex-row flex d-flex align-items-center b-b bg-primary">
@@ -53,9 +52,7 @@
             </div>
         </div>
     </div>
-    {% endif %}
-    
-    
+        
 </div>
 
 {% endblock content %}
