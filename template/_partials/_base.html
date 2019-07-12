@@ -7,14 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title> {% block title %}{% endblock title %} | {{ application_name }}</title>
         <!-- Bootstrap-->
-        <link href="{% static 'lib/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'plugins/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
         <!--Common Plugins CSS -->
         <link href="{% static 'css/plugins/plugins.css' %}" rel="stylesheet">
         <!--fonts-->
-        <link href="{% static 'lib/line-icons/line-icons.css' %}" rel="stylesheet">
-        <link href="{% static 'lib/font-awesome/css/fontawesome-all.min.css' %}" rel="stylesheet">
+        <link href="{% static 'plugins/line-icons/line-icons.css' %}" rel="stylesheet">
+        <link href="{% static 'plugins/font-awesome/css/fontawesome-all.min.css' %}" rel="stylesheet">
         <!-- jvectormap -->
-        <link href="{% static 'lib/vector-map/jquery-jvectormap-2.0.2.css' %}" rel="stylesheet" />
+        <link href="{% static 'plugins/vector-map/jquery-jvectormap-2.0.2.css' %}" rel="stylesheet" />
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
         {% block styles %}
         {% endblock styles %}
@@ -98,11 +98,11 @@
         <!-- Common plugins -->
         <script type="text/javascript" src="{% static 'js/plugins/plugins.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/appUi-custom.js' %}"></script>
-        <script type="text/javascript" src="{% static 'lib/chartjs/dist/chart.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'lib/peity/jquery.peity.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/chartjs/dist/chart.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/peity/jquery.peity.min.js' %}"></script>
         <!-- jvectormap -->
-        <script src="{% static 'lib/vector-map/jquery-jvectormap-2.0.2.min.js' %}"></script>
-        <script src="{% static 'lib/vector-map/jquery-jvectormap-world-mill-en.js' %}"></script>
+        <script src="{% static 'plugins/vector-map/jquery-jvectormap-2.0.2.min.js' %}"></script>
+        <script src="{% static 'plugins/vector-map/jquery-jvectormap-world-mill-en.js' %}"></script>
        {% block javascript %}
        {% endblock javascript %}
     </body>

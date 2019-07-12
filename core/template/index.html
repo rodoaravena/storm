@@ -2,9 +2,9 @@
 {% load static %}
 {% block title %}Inicio{% endblock title %}
 {% block styles %}
-    <link href="{% static 'lib/fullcalendar/fullcalendar.min.css' %} " rel="stylesheet">
-    <link href="{% static 'lib/dt-picker/jquery.datetimepicker.min.css' %}" rel="stylesheet">
-    <link href="{% static 'lib/timeline-js/timeline.min.js' %}" rel="stylesheet">
+    <link href="{% static 'plugins/fullcalendar/fullcalendar.min.css' %} " rel="stylesheet">
+    <link href="{% static 'plugins/dt-picker/jquery.datetimepicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/timeline-js/timeline.min.js' %}" rel="stylesheet">
 {% endblock styles %}
 {% block breadcrumbs %}
     <li class="breadcrumb-item">Disponibilidad</li>
@@ -12,7 +12,7 @@
 {% block content %}
 
 <div class="row fullscreen">
-    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 bg-white d-flex no-padding flex-column">
+    <div class="col-xl-6 col-lg-6  col-md-12 col-sm-12 bg-white d-flex no-padding flex-column">
         <div class="p-4">            
             <div id="calendar"></div>
         </div>
@@ -58,11 +58,11 @@
 {% endblock content %}
 
 {% block javascript %}
-    <script src="{% static 'lib/fullcalendar/moment.js' %}"></script>
-    <script src="{% static 'lib/fullcalendar/locales/es.js' %}"></script>
-    <script src="{% static 'lib/fullcalendar/fullcalendar.min.js' %}"></script>       
-    <script src="{% static 'lib/timeline-js/timeline.min.js' %}"></script>       
-    <script type="text/javascript" src="{% static 'lib/dt-picker/jquery.datetimepicker.full.min.js' %}"></script>
+    <script src="{% static 'plugins/fullcalendar/moment.js' %}"></script>
+    <script src="{% static 'plugins/fullcalendar/locales/es.js' %}"></script>
+    <script src="{% static 'plugins/fullcalendar/fullcalendar.min.js' %}"></script>       
+    <script src="{% static 'plugins/timeline-js/timeline.min.js' %}"></script>       
+    <script type="text/javascript" src="{% static 'plugins/dt-picker/jquery.datetimepicker.full.min.js' %}"></script>
 
     <script>
         $(document).ready(function(){
